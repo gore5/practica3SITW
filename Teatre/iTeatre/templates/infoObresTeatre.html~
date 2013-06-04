@@ -1,0 +1,28 @@
+{% extends "index.html"  %}
+
+{% block content %}
+		<h1>{{ obra_teatre }}</h1>
+{% endblock %}
+{% block nextcontent %}	
+		<li><p> <b>{{obra_teatre.nom }}</b></p></li>
+		<ol>
+			<ol><p>G&egrave;nere: {{obra_teatre.Tipus}}</p>
+				<p><a href="escriptors/{{obra_teatre.escriptor.id}}">Escriptor: {{obra_teatre.escriptor}}</a></p>
+					<ol>{% for representacio in obra_teatre.representacions.all %}
+					<li><b><p>Representacio: {{representacio.nom.nomObra}}</b></p></li>
+					<p>Director: {{representacio.director}}</p>
+					<p>Data d'inici: {{representacio.dataInici}}</p>
+					<p>Data fi: {{representacio.dataFi}}</p>
+					<p>Actors: </p>
+						<ol>{% for actor in representacio.actors.all  %}
+						<li><p>{{actor.nom}}</p></li>
+						{% endfor %}
+						</ol>			
+					{% endfor %}
+					</ol>
+			</ol>
+		</ol>
+<p><a href="{{request.path}}edit">Editar</a></p>
+<p><a href="/obresTeatre">Endarrera</a></p>
+		
+{% endblock %}

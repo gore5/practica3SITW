@@ -1,0 +1,22 @@
+{% extends "index.html"  %}
+
+
+
+
+{% block content %}
+		<h1>{{request.path}}</h1>
+{% endblock %}
+
+		{% block nextcontent %}	
+		<p><a href="create">Afegir +</p>	
+		<ul>
+			{% for i in contentbody %}
+			<li>
+				<p><a href="{{i.id}}/">{{i.nom}} </a></p>
+				<p align="right"><a href="{{i.id}}/delete"> Eliminar </a></p>
+			</li>
+			{% endfor %}
+		</ul>
+
+{% endblock %}
+	

@@ -1,0 +1,18 @@
+{% extends "index.html"  %}
+
+{% block content %}
+	<h1>{{escriptor.nom}}</h1>
+{% endblock %}
+
+	{% block nextcontent %}	
+		<ul>
+		<p><b>Nom:</b> {{escriptor.nom}}</p>
+		<p><b>Edat:</b> {{escriptor.edat}}</p>
+		<p><b>Sexe:</b> {{escriptor.sexe}}</p>
+		<p><b>Localitat:</b> {{escriptor.localitat}}</p>
+		</ul>
+
+
+<p><a href="{{ request.META.HTTP_REFERER }}">Endarrera</a></p>
+<p><a href="{{request.path}}edit">Editar</a></p>
+	{% endblock %}

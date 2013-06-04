@@ -1,0 +1,10 @@
+{% extends "index.html"  %}
+
+
+
+		<title>Teatres de Catalunya</title>
+
+	{% block content %}
+	<h1>Error</h1>{% endblock %}{% block nextcontent %}
+	<p>Tens que autentificar-te</p>
+	<p><a href="/">Endarrera </a></p> 

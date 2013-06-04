@@ -1,0 +1,76 @@
+{% extends "index.html"  %}
+
+{% block content %}
+<span vocab="http://schema.org/" typeof="Representacio">
+
+<span property="name"><h1>Representacio : {{representacio}}</h1></span>
+{% endblock %}
+ {% block nextcontent %}
+
+	
+		<ol>
+		<p><b>T&iacute;tol:</b> {{representacio.nom}}</p>
+		<p><b>Obra que representa:</b> {{representacio.nomObra}}</p>
+		<p><a href="directors/{{representacio.director.id}}"><b>Director:</b> {{representacio.director}}</a></p>
+		<p><b>Comen&ccedil;a el:</b> {{representacio.dataInici}}</p>
+		<p><b>Acaba el:</b> {{representacio.dataFi}}</p>
+		<p><b>Actors:</b></p>
+						<ol>{% for actor in representacio.actors.all  %}
+						<li><p><a href="actors/{{actor.id}}">{{actor.nom}}<a/></p></li>
+						{% endfor %}
+						</ol>			
+		</ol>
+
+<h2>Reviews</h2>
+{% if representacio.representacioreview_set.all|length > 0 %}
+<span rel="aggregateRating">
+	<p typeof="AggregateRating"> Average rating
+
+<span property="ratingValue">{{ representacio.averageRating|stringformat:".1f" }}</span>
+	{% with representacio.representacioreview_set.all|length as reviewCount %}
+	from <span property="reviewCount">{{ reviewCount }} 
+	</span> review{{ reviewCount|pluralize }}
+{% endwith %}
+</p>
+</span>
+
+
+<ol rel="review">
+	{% for review in representacio.representacioreview_set.all %}
+	<li typeof="Review" >
+		<p rel="reviewRating" typeof="Rating">
+			<span property="worstRating" content="{{ RATING_CHOICES.0.0 }}"></span>
+			<span property="ratingValue">{{ review.rating }}</span>
+			star{{ review.rating|pluralize }}
+			{% with RATING_CHOICES|last as best %}
+			<span property="bestRating" content="{{ best.0 }}"></span>
+			{% endwith %}
+		</p>
+		<p property="description">{{ review.comment }}</p>
+		<p>Created by <span property="author">{{ review.user }}</span> on
+		<span property="publishDate">{{ review.date}}</span></p>
+	</li>
+	{% endfor %}
+</ol>
+</span>
+{% endif %}
+
+<h3>Add Review</h3>
+<form action="{{request.path}}reviews/create" method="post">
+{% csrf_token %}
+Message: <textarea name="comment" id="comment" rows="4"></textarea>
+<p>Rating:</p>
+
+<p>
+{% for rate in RATING_CHOICES %}
+	<input type="radio" name="rating" id="rating{{ forloop.counter }}" value="{{ rate.1 }}" />
+	<label for="choice{{ forloop.counter }}">{{ rate.1 }} star{{ rate.0|pluralize }}</label><br />
+{% endfor %}
+</p>
+	<input type="submit" value="Review" />
+</form>
+
+
+<p><a href="{{request.path}}edit">Editar</a></p>
+<p><a href="/representacions">Endarrera</a></p>
+{% endblock %}

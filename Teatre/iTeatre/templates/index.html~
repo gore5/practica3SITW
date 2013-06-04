@@ -1,0 +1,86 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+	<link rel="stylesheet"  href=" {% static "style.css" %} " />
+        <meta name="keywords" content="" />
+        <meta name="description" content="" />
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<title>Teatres de Catalunya</title>
+        <link href="http://fonts.googleapis.com/css?family=Arvo" rel="stylesheet" type="text/css" />
+        <link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css" />
+     
+    </head>
+    <body>
+	
+		<div id="bg">
+			<div id="outer">
+				<div id="header">
+					<div id="logo">
+						<h1>
+							<a href="/">Teatre Catalunyans</a>
+						</h1>
+					</div>
+					
+				</div>
+				<div id="main">
+					<div id="sidebar">
+						<h3>
+							Hola! {% if user.username %}<p>User {{ user.username }}</p>
+							<a href="/admin">Acc&eacute;s base de dades</a>
+							{% else %} <p><a href="/login/"> Sign in </a></p>{% endif %}
+						</h3>
+						
+						<p>
+							Aqu&iacute; tens tots els links que pots llistar:
+						</p>
+						
+						<ul class="linkedList">
+							<li class="first">
+								<a href="/escriptors">Escriptors</a>
+							</li>
+							<li>
+								<a href="/actors">Actors</a>
+							</li>
+							<li>
+								<a href="/directors">Directors</a>
+							</li>
+							<li>
+								<a href="/representacions">Representacions</a>
+							</li>
+							<li class="last">
+								<a href="/obresTeatre">Obres de teatre</a>
+							</li>
+						</ul>
+					</div>
+					
+
+					<div id="content">
+						<div id="box1">
+						{% block content %}
+							<h2><center> 
+								Benvingut a  Teatre Catalunyans
+							</center>
+							</h2>
+							<img src="{% static "images/v-de-vendetta.jpg" %}" width="800" height="500" alt="My image"/>
+							{% endblock %}
+						
+
+							
+							<p>{% block nextcontent %} 
+								
+							</p>{% endblock %}
+						</div>
+						
+						<br class="clear" />
+					</div>
+					<br class="clear" />
+				</div>
+			</div>
+			<div id="copyright">
+				&copy; CatalunyaLliure | Created by Carol and Pol </a>
+			</div>
+		</div>
+    </body>
+</html>

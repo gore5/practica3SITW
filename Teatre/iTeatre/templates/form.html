@@ -1,0 +1,58 @@
+{% extends "index.html"  %}
+{% load staticfiles %}
+	{% block content %}
+		<h1>Formulari</h1>
+	{% endblock %}	 
+
+	{% block nextcontent %}	
+  <script>
+        $(function() {
+            $.getJSON("{% static "noms.json" %}", {}, function (noms) {
+                $("#id_nom").autocomplete({
+                    source: noms
+                });
+            });
+
+            $("#id_localitat").autocomplete({
+                source: function( request, response ) {
+                    $.ajax({
+                        url: "http://ws.geonames.org/searchJSON",
+                        dataType: "jsonp",
+                        data: {
+                            featureClass: "P",
+                            maxRows: 10,
+                            name_startsWith: request.term
+                        },
+                        success: function( data ) {
+                            response( $.map( data.geonames, function( item ) {
+                                return {
+                                    label: item.name + (item.adminName1 ? ", " + item.adminName1 : "") + ", " + item.countryName,
+                                    value: item.name,
+                                    stateOrProvince: item.adminName1,
+                                    countryName: item.countryName
+                                }
+                            }));
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function( event, ui ) {
+                    if (ui.item) {
+                        $("#id_localitat").val(ui.item.countryName);
+                    }
+                }
+            });
+        });
+    </script>
+	
+		
+		<form method="post" action="">	
+		
+			{% csrf_token %}	
+			<table>	
+				{{ form.as_table }}	
+			</table>	
+			<input type="submit" value="Aceptar"/>
+		</form>	
+	<p><a href="{{request.META.HTTP_REFERER}}"><button>Cancel·lar</button></a></p>
+{% endblock %}
