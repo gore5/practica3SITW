@@ -1,17 +1,18 @@
 {% extends "index.html"  %}
 
 {% block content %}
-	<h1>{{escriptor.nom}}</h1>
+	<h1>{{person.nom}}</h1>
 {% endblock %}
 
 	{% block nextcontent %}	
+	<div itemscope itemtype="http://schema.org/Person">
 		<ul>
-		<p><b>Nom:</b> {{escriptor.nom}}</p>
-		<p><b>Edat:</b> {{escriptor.edat}}</p>
-		<p><b>Sexe:</b> {{escriptor.sexe}}</p>
-		<p><b>Localitat:</b> {{escriptor.localitat}}</p>
+		<span itemprop="name"><p><b>Nom:</b> {{person.nom}}</p></span>
+		<span itemprop="age"><p><b>Edat:</b> {{person.edat}}</p></span>
+		<span itemprop="gender"><p><b>Sexe:</b> {{person.sexe}}</p></span>
+		<span itemprop="nationality"><p><b>Localitat:</b> {{person.localitat}}</p></span>
 		</ul>
-
+	</div>
 
 <p><a href="{{ request.META.HTTP_REFERER }}">Endarrera</a></p>
 <p><a href="{{request.path}}edit">Editar</a></p>

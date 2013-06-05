@@ -97,7 +97,10 @@ class Review(models.Model):
     comment = models.TextField(blank=True, null=True)
     user = models.ForeignKey(User,blank=True,null=True)	
     date = models.DateField(default=date.today)
+	
+   
 
+    
     #class Meta:
     #    abstract = True
 

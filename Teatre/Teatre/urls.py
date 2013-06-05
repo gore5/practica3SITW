@@ -215,8 +215,8 @@ urlpatterns = patterns('',
 	name='obraTeatre_delete'),
 
  # ex: /myrestaurants/restaurants/1/reviews/create/
-	url(r'^representacio/(?P<pk>\d+)/reviews/create/$',
-	'views.review',
+	url(r'^representacions/(?P<pk>\d+)/reviews/create/$',
+	'iTeatre.views.review',
 	name='review_create'),
 		
 

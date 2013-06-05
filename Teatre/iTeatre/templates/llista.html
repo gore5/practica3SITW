@@ -12,7 +12,12 @@
 		<ul>
 			{% for i in contentbody %}
 			<li>
+				{% if request.path == "/representacions" %} 
+				<p><a href="{{request.path}}/{{i.id}}/">{{i.nomRepresentacio}} </a></p>
+				{% else %}
 				<p><a href="{{request.path}}/{{i.id}}/">{{i.nom}} </a></p>
+				{% endif %}
+				
 				<p align="right"><a href="{{request.path}}/{{i.id}}/delete"> Eliminar </a></p>
 			</li>
 			{% endfor %}

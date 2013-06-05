@@ -1,7 +1,7 @@
 {% extends "index.html"  %}
 
 {% block content %}
-<span vocab="http://schema.org/" typeof="Representacio">
+<span vocab="http://schema.org/" typeof="Place">
 
 <span property="name"><h1>Representacio : {{representacio}}</h1></span>
 {% endblock %}
@@ -16,7 +16,7 @@
 		<p><b>Acaba el:</b> {{representacio.dataFi}}</p>
 		<p><b>Actors:</b></p>
 						<ol>{% for actor in representacio.actors.all  %}
-						<li><p><a href="actors/{{actor.id}}">{{actor.nom}}<a/></p></li>
+						<li><p><a href="actors/{{actor.id}}">{{actor.nom}}</a></p></li>
 						{% endfor %}
 						</ol>			
 		</ol>
@@ -26,7 +26,7 @@
 <span rel="aggregateRating">
 	<p typeof="AggregateRating"> Average rating
 
-<span property="ratingValue">{{ representacio.averageRating|stringformat:".1f" }}</span>
+<span property="ratingValue">{{representacio.averageRating|stringformat:".1f"}}</span>
 	{% with representacio.representacioreview_set.all|length as reviewCount %}
 	from <span property="reviewCount">{{ reviewCount }} 
 	</span> review{{ reviewCount|pluralize }}
@@ -56,7 +56,7 @@
 {% endif %}
 
 <h3>Add Review</h3>
-<form action="{{request.path}}reviews/create" method="post">
+<form action="{{request.path}}reviews/create/" method="post">
 {% csrf_token %}
 Message: <textarea name="comment" id="comment" rows="4"></textarea>
 <p>Rating:</p>

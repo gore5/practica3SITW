@@ -91,7 +91,17 @@ class GenericDelete(LoginRequiredMixin,CheckIsOwnerMixin,DeleteView):
 
 
 
-
+@login_required()
+def review(request, pk):
+    representacio = get_object_or_404(Representacio, pk=pk)
+    review = RepresentacioReview(
+        rating=request.POST['rating'],
+        comment=request.POST['comment'],
+        user=request.user,
+        representacio=representacio)
+    review.save()
+    return HttpResponseRedirect(urlresolvers.reverse('representacio_detail', args=(representacio.id)))
+	
 	
 #APIS
 class IsOwnerOrReadOnly(permissions.BasePermission):

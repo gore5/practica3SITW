@@ -8,12 +8,17 @@
 {% endblock %}
 
 		{% block nextcontent %}	
-		<p><a href="create">Afegir +</p>	
+		<p><a href="{{request.path}}/create">Afegir +</p>	
 		<ul>
 			{% for i in contentbody %}
 			<li>
-				<p><a href="{{i.id}}/">{{i.nom}} </a></p>
-				<p align="right"><a href="{{i.id}}/delete"> Eliminar </a></p>
+				{% if {{request.path}} == "/representacions" %} 
+				<p><a href="{{request.path}}/{{i.id}}/">{{i.nomRepresentacio}} </a></p>
+				{% else %}
+				<p><a href="{{request.path}}/{{i.id}}/">{{i.nom}} </a></p>
+				{% endif %}
+				
+				<p align="right"><a href="{{request.path}}/{{i.id}}/delete"> Eliminar </a></p>
 			</li>
 			{% endfor %}
 		</ul>

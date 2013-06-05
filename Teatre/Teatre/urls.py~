@@ -137,7 +137,7 @@ urlpatterns = patterns('',
 	name='representacio_create'),
 	
 	# DETAIL
-	url(r'^representacions/(?P<pk>\d+)/$',RepresentacioDetail.as_view(
+	url(r'^representacions/(?P<pk>\d+)/$',RepresentacioDetail.as_view(),
 	name='representacio_detail'),
 	
 	# DETAIL DIRECTOR
@@ -215,8 +215,9 @@ urlpatterns = patterns('',
 	name='obraTeatre_delete'),
 
  # ex: /myrestaurants/restaurants/1/reviews/create/
-	url(r'^representacio/(?P<pk>\d+)/reviews/create/$',
-	'views.review',
+	url(r'^representacions/(?P<pk>\d+)/reviews/create/$',
+	'iTeatre.views.review',
+	template_name = 'representacio.html', 
 	name='review_create'),
 		
 

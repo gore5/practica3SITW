@@ -100,7 +100,7 @@ def review(request, pk):
         user=request.user,
         representacio=representacio)
     review.save()
-    return HttpResponseRedirect(urlresolvers.reverse('representacio_detail', args=(representacio.id,)))
+    return HttpResponseRedirect(reverse('representacio_detail', args=(representacio.id,)))
 	
 	
 #APIS
