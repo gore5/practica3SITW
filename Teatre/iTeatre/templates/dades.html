@@ -5,14 +5,15 @@
 {% endblock %}
 
 	{% block nextcontent %}	
-	<span vocab="http://schema.org/" typeof="Person">
-		<ul>
-		<span itemprop="name"><p><b>Nom:</b> {{person.nom}}</p></span>
-		<span itemprop="age"><p><b>Edat:</b> {{person.edat}}</p></span>
-		<span itemprop="gender"><p><b>Sexe:</b> {{person.sexe}}</p></span>
-		<span itemprop="nationality"><p><b>Localitat:</b> {{person.localitat}}</p></span>
+	
+		<ul><span vocab="http://schema.org/" typeof="Person">
+		<span property="name"><p><b>Nom:</b> {{person.nom}}</p></span>
+		<span property="age"><p><b>Edat:</b> {{person.edat}}</p></span>
+		<span property="gender"><p><b>Sexe:</b> {{person.sexe}}</p></span>
+		<span property="nationality"><p><b>Localitat:</b> {{person.localitat}}</p></span>
+		</span>
 		</ul>
-	</span>
+	
 
 <p><a href="{{ request.META.HTTP_REFERER }}">Endarrera</a></p>
 <p><a href="{{request.path}}edit">Editar</a></p>
