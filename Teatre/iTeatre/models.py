@@ -69,7 +69,14 @@ class Representacio (models.Model):
 	director = models.ForeignKey(Director)
 	user = models.ForeignKey(User,blank=True,null=True)	
 	
-	
+		def averageRating(self):
+			suma = 0.0
+			total = 0
+			for review in self.leaguereview_set.all():
+				suma += review.rating
+				total += 1
+			average = suma/total
+			return mitja	
 
 	def __unicode__(self):
 		return self.nomRepresentacio
